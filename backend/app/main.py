@@ -1,4 +1,4 @@
-from app.routers import transcribe
+from app.routers import cache, transcribe
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,3 +13,4 @@ app.add_middleware(
 )
 
 app.include_router(transcribe.router, prefix="/api")
+app.include_router(cache.router, prefix="/api")
