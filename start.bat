@@ -47,17 +47,16 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-:: Start backend
+:: Start backend in background (same console = guardian)
 echo [3/4] Starting backend (port 8000)...
 cd /d "%~dp0backend"
-start "Afterglow Backend" cmd /k "title Afterglow Backend && python -m uvicorn app.main:app --reload --port 8000"
+start /b python -m uvicorn app.main:app --reload --port 8000
 
-:: Start frontend
+:: Start frontend in background (same console = guardian)
 echo [4/4] Starting frontend (port 5173)...
 cd /d "%~dp0frontend"
-start "Afterglow Frontend" cmd /k "title Afterglow Frontend && npm run dev"
+start /b cmd /c "npm run dev"
 
-:: Wait a moment then open browser
 timeout /t 3 /nobreak >nul
 start http://localhost:5173
 
@@ -67,6 +66,13 @@ echo   Afterglow is running!
 echo   Frontend: http://localhost:5173
 echo   Backend:  http://localhost:8000
 echo ========================================
-echo   Close the two terminal windows to stop.
 echo.
-pause
+echo   Close this window to stop all services.
+echo   Or press any key to stop gracefully.
+echo.
+pause >nul
+
+:: Graceful cleanup (for key-press exit; window-close is handled by OS)
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":8000.*LISTENING" 2^>nul') do taskkill /pid %%a /t /f >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":5173.*LISTENING" 2^>nul') do taskkill /pid %%a /t /f >nul 2>&1
+echo Stopped.
