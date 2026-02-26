@@ -2,11 +2,10 @@ import {forwardRef} from "react";
 
 interface VideoPlayerProps {
     src: string | null;
-    onTimeUpdate: (currentTime: number) => void;
 }
 
 const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
-    ({src, onTimeUpdate}, ref) => {
+    ({src}, ref) => {
         if (!src) {
             return (
                 <div className="video-placeholder">
@@ -21,7 +20,6 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
                 className="video-player"
                 src={src}
                 controls
-                onTimeUpdate={(e) => onTimeUpdate(e.currentTarget.currentTime)}
             />
         );
     }

@@ -31,3 +31,13 @@ export const DEFAULT_FEATURES: FeatureToggleConfig = {
 };
 
 export type FeatureKey = keyof FeatureToggleConfig;
+
+export type LoopCount = 1 | 2 | 3 | 5 | typeof Infinity;
+
+export type ShadowState = "idle" | "playing" | "gapping" | "paused";
+
+export interface CacheEntry {
+    segments: Segment[];
+    language: string;
+    timestamp: number;
+}
