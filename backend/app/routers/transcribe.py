@@ -1,3 +1,4 @@
+import asyncio
 import tempfile
 from pathlib import Path
 
@@ -17,7 +18,7 @@ async def transcribe_video(file: UploadFile = File(...)):
         tmp_path = tmp.name
 
     try:
-        result = transcribe(tmp_path)
+        result = await asyncio.to_thread(transcribe, tmp_path)
     finally:
         Path(tmp_path).unlink(missing_ok=True)
 
