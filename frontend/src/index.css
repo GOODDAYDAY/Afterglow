@@ -1,17 +1,72 @@
 :root {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --bg-primary: #060610;
+    --bg-card: rgba(8, 6, 18, 0.6);
+    --bg-card-hover: rgba(14, 10, 28, 0.7);
+    --border-subtle: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --accent: #f0a500;
+    --accent-light: #ffbe3d;
+    --accent-gradient: linear-gradient(135deg, #f0a500, #ff6b35);
+    --accent-glow: rgba(240, 165, 0, 0.35);
+    --text-primary: rgba(255, 255, 255, 0.92);
+    --text-secondary: rgba(255, 255, 255, 0.55);
+    --text-muted: rgba(255, 255, 255, 0.28);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --blur: blur(24px);
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-    color: #e0e0e0;
-    background-color: #1a1a2e;
+    color: var(--text-primary);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+html, body, #root {
     margin: 0;
-    min-width: 320px;
-    min-height: 100vh;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: var(--bg-primary);
+}
+
+/* Cartoon background layer */
+.cartoon-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.cartoon-bg svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.18);
 }

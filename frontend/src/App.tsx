@@ -1,4 +1,5 @@
 import {useCallback, useMemo, useRef, useState} from "react";
+import Background from "./components/Background";
 import FileLoader from "./components/FileLoader";
 import VideoPlayer from "./components/VideoPlayer";
 import TranscriptPanel from "./components/TranscriptPanel";
@@ -116,6 +117,7 @@ function App() {
 
     return (
         <div className="app">
+            <Background/>
             <header className="app-header">
                 <h1>Afterglow</h1>
             </header>
